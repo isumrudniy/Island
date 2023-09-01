@@ -1,2 +1,2 @@
 # Island
-Task for second module
+Task for second module JavaRush
