@@ -9,13 +9,21 @@ import java.util.Arrays;
 import java.util.Random;
 
 public class Island {
-    public static void main(String[] args) {
-        Location[][] island = new Location[5][5];
+    private final int ROWS = 5;
+    private final int COLS = 5;
+    private Location[][] locations;
 
-        for (int i = 0; i < island.length; i++) {
-            for (int j = 0; j < island[i].length; j++) {
-                island[i][j] = new Location(i, j, new ArrayList<Animal>(Arrays.asList(new Wolf( new Random().nextDouble(7.9), 3, 3, 2), new Rabbit(1, 3, 4, 1))));
-                System.out.println(island[i][j].toString());
+    public Island() {
+        this.locations = new Location[ROWS][COLS];
+    }
+
+    public static void main(String[] args) {
+        Island island = new Island();
+
+        for (int i = 0; i < island.locations.length; i++) {
+            for (int j = 0; j < island.locations[i].length; j++) {
+                island.locations[i][j] = new Location(i, j, new ArrayList<Animal>(Arrays.asList(new Wolf(new Random().nextDouble(7.9), 3, 3, 2), new Rabbit(1, 3, 4, 1))));
+                System.out.println(island.locations[i][j].toString());
             }
         }
 
