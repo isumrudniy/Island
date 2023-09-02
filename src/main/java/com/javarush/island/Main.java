@@ -1,10 +1,11 @@
 package com.javarush.island;
 
 import com.javarush.island.entities.animals.predators.Wolf;
+import com.javarush.island.utilities.Settings;
 
 public class Main {
     public static void main(String[] args) {
-        Location[][] gameMap = new Location[5][5];
+        Location[][] gameMap = new Location[Settings.ROWS][Settings.COLS];
 
         LocationFactory locationFactory = new LocationFactory();
 
