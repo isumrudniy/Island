@@ -19,7 +19,7 @@ public class LocationFactory {
         return location;
     }
 
-    // Оптимизировать, значения брать из yaml
+    // Оптимизировать, значения брать из yaml (максимальное значение животных в одной локации)
     private List<Entities> createEntities() {
         List<Entities> entitiesList = new ArrayList<>();
         Random random = new Random();
