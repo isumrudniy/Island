@@ -1,4 +1,4 @@
-package com.javarush.island;
+package com.javarush.island.map;
 
 import com.javarush.island.entities.Entities;
 import lombok.AllArgsConstructor;

@@ -1,9 +1,10 @@
-package com.javarush.island;
+package com.javarush.island.map;
 
 import com.javarush.island.entities.Entities;
 import com.javarush.island.entities.animals.herbivores.*;
 import com.javarush.island.entities.animals.predators.*;
 import com.javarush.island.entities.plants.Plant;
+import com.javarush.island.map.Location;
 
 import java.util.ArrayList;
 import java.util.List;
