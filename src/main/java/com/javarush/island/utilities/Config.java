@@ -1,4 +1,4 @@
-package com.javarush.island.abstracts;
+package com.javarush.island.utilities;
 public @interface Config {
     String fileName() default "";
 }

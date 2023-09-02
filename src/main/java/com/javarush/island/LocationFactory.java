@@ -1,15 +1,14 @@
 package com.javarush.island;
 
 import com.javarush.island.entities.Entities;
-import com.javarush.island.entities.animals.herbivores.Horse;
-import com.javarush.island.entities.animals.herbivores.Rabbit;
-import com.javarush.island.entities.animals.herbivores.Reindeer;
+import com.javarush.island.entities.animals.herbivores.*;
 import com.javarush.island.entities.animals.predators.*;
 import com.javarush.island.entities.plants.Plant;
 
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
+import java.util.function.Supplier;
 
 public class LocationFactory {
     public Location create(int x, int y) {
@@ -23,42 +22,27 @@ public class LocationFactory {
     // Оптимизировать, значения брать из yaml
     private List<Entities> createEntities() {
         List<Entities> entitiesList = new ArrayList<>();
-        for (int i = 0; i < new Random().nextInt(30); i++) {
-            entitiesList.add(new Wolf());
-        }
+        Random random = new Random();
 
-        for (int i = 0; i < new Random().nextInt(30); i++) {
-            entitiesList.add(new Snake());
-        }
-
-        for (int i = 0; i < new Random().nextInt(30); i++) {
-            entitiesList.add(new Fox());
-        }
-
-        for (int i = 0; i < new Random().nextInt(5); i++) {
-            entitiesList.add(new Bear());
-        }
-
-        for (int i = 0; i < new Random().nextInt(20); i++) {
-            entitiesList.add(new Eagle());
-        }
-
-        for (int i = 0; i < new Random().nextInt(20); i++) {
-            entitiesList.add(new Horse());
-        }
-
-        for (int i = 0; i < new Random().nextInt(20); i++) {
-            entitiesList.add(new Reindeer());
-        }
-
-        for (int i = 0; i < new Random().nextInt(150); i++) {
-            entitiesList.add(new Rabbit());
-        }
-
-        for (int i = 0; i < new Random().nextInt(200); i++) {
-            entitiesList.add(new Plant());
-        }
+        entitiesList.addAll(createEntityBatch(random, 30, Wolf::new));
+        entitiesList.addAll(createEntityBatch(random, 30, Snake::new));
+        entitiesList.addAll(createEntityBatch(random, 30, Fox::new));
+        entitiesList.addAll(createEntityBatch(random, 5, Bear::new));
+        entitiesList.addAll(createEntityBatch(random, 20, Eagle::new));
+        entitiesList.addAll(createEntityBatch(random, 20, Horse::new));
+        entitiesList.addAll(createEntityBatch(random, 20, Reindeer::new));
+        entitiesList.addAll(createEntityBatch(random, 150, Rabbit::new));
+        entitiesList.addAll(createEntityBatch(random, 200, Plant::new));
 
         return entitiesList;
     }
+
+    private List<Entities> createEntityBatch(Random random, int count, Supplier<Entities> supplier) {
+        List<Entities> batch = new ArrayList<>();
+        for (int i = 0; i < random.nextInt(count); i++) {
+            batch.add(supplier.get());
+        }
+        return batch;
+    }
+
 }
