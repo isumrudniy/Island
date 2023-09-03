@@ -1,11 +1,5 @@
 package com.javarush.island.utilities;
 
-import lombok.Getter;
-import lombok.Setter;
-
-@Getter
-@Setter
-
 public class Settings {
 
     public static final String SALUTATION = "Приветствую тебя, мой дорогой друг!" +
