@@ -2,8 +2,7 @@ package com.javarush.island.utilities;
 
 import com.javarush.island.entities.animals.predators.Wolf;
 import com.javarush.island.map.Location;
-import com.javarush.island.map.Map;
-import com.javarush.island.utilities.Settings;
+import com.javarush.island.map.GameMap;
 
 import java.util.Scanner;
 
@@ -20,11 +19,12 @@ public class Menu {
             System.out.println(Settings.NOT_KNOW_ERROR);
         }
 
-        Location[][] gameMap = Map.map();
+        // Инициализация острова
+        GameMap gameMap = GameMap.getInstance();
 
         // Для проверки реализации
 
-        for (var map : gameMap
+        for (var map : gameMap.locations
         ) {
             for (var loc : map
             ) {
