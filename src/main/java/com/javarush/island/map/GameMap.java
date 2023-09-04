@@ -4,10 +4,18 @@ import com.javarush.island.utilities.Settings;
 
 public class GameMap {
     private static GameMap instance;
-    public Location[][] locations;
+    private Location[][] locations;
 
     private GameMap() {
         createMap();
+    }
+
+    public Location[][] getLocations() {
+        return locations;
+    }
+
+    public Location getLocation(int x, int y) {
+        return locations[x][y];
     }
 
     public static GameMap getInstance() {

@@ -5,5 +5,4 @@ import com.javarush.island.abstracts.Herbivore;
 
 @Config(fileName = "config/animals/herbivores/boar.yaml")
 public class Boar extends Herbivore {
-
 }

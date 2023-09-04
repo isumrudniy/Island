@@ -1,7 +1,7 @@
 package com.javarush.island.utilities;
 
+import com.javarush.island.entities.Entities;
 import com.javarush.island.entities.animals.predators.Wolf;
-import com.javarush.island.map.Location;
 import com.javarush.island.map.GameMap;
 
 import java.util.Scanner;
@@ -22,12 +22,12 @@ public class Menu {
         // Инициализация острова
         GameMap gameMap = GameMap.getInstance();
 
-        // Для проверки реализации
-
-        for (var map : gameMap.locations
+        //  Для проверки реализации. После удалить! {
+        for (var map : gameMap.getLocations()
         ) {
             for (var loc : map
             ) {
+                loc.getEntitiesList().forEach(Entities::move);
                 System.out.println(loc);
                 System.out.println(loc.getX() + " " + loc.getY());
                 loc.getEntitiesList().forEach(entity -> System.out.println(entity instanceof Wolf));
@@ -36,5 +36,6 @@ public class Menu {
             System.out.println();
             System.out.println();
         }
+        //  }
     }
 }

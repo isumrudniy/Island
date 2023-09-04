@@ -16,24 +16,28 @@ public class LocationFactory {
         Location location = new Location();
         location.setX(x);
         location.setY(y);
-        location.setEntitiesList(createEntities());
+        location.setEntitiesList(createEntities(x, y));
         return location;
     }
 
     // Оптимизировать, значения брать из yaml (максимальное значение животных в одной локации)
-    private List<Entities> createEntities() {
+    private List<Entities> createEntities(int x, int y) {
         List<Entities> entitiesList = new ArrayList<>();
         Random random = new Random();
 
         entitiesList.addAll(createEntityBatch(random, 30, Wolf::new));
-        entitiesList.addAll(createEntityBatch(random, 30, Snake::new));
-        entitiesList.addAll(createEntityBatch(random, 30, Fox::new));
-        entitiesList.addAll(createEntityBatch(random, 5, Bear::new));
-        entitiesList.addAll(createEntityBatch(random, 20, Eagle::new));
-        entitiesList.addAll(createEntityBatch(random, 20, Horse::new));
-        entitiesList.addAll(createEntityBatch(random, 20, Reindeer::new));
-        entitiesList.addAll(createEntityBatch(random, 150, Rabbit::new));
-        entitiesList.addAll(createEntityBatch(random, 200, Plant::new));
+//        entitiesList.addAll(createEntityBatch(random, 30, Snake::new));
+//        entitiesList.addAll(createEntityBatch(random, 30, Fox::new));
+//        entitiesList.addAll(createEntityBatch(random, 5, Bear::new));
+//        entitiesList.addAll(createEntityBatch(random, 20, Eagle::new));
+//        entitiesList.addAll(createEntityBatch(random, 20, Horse::new));
+//        entitiesList.addAll(createEntityBatch(random, 20, Reindeer::new));
+//        entitiesList.addAll(createEntityBatch(random, 150, Rabbit::new));
+//        entitiesList.addAll(createEntityBatch(random, 200, Plant::new));
+
+        for (int id = 0; id < entitiesList.size(); id++) {
+            entitiesList.get(id).setEntityParam(x, y, id);
+        }
 
         return entitiesList;
     }
