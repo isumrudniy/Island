@@ -2,6 +2,8 @@ package com.javarush.island.map;
 
 import com.javarush.island.entities.Entity;
 import com.javarush.island.entities.animals.predators.*;
+import com.javarush.island.entities.animals.herbivores.*;
+import com.javarush.island.entities.plants.*;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -23,14 +25,14 @@ public class LocationFactory {
         Random random = new Random();
 
         entityList.addAll(createEntityBatch(random, 30, Wolf::new));
-//        entitiesList.addAll(createEntityBatch(random, 30, Snake::new));
-//        entitiesList.addAll(createEntityBatch(random, 30, Fox::new));
-//        entitiesList.addAll(createEntityBatch(random, 5, Bear::new));
-//        entitiesList.addAll(createEntityBatch(random, 20, Eagle::new));
-//        entitiesList.addAll(createEntityBatch(random, 20, Horse::new));
-//        entitiesList.addAll(createEntityBatch(random, 20, Reindeer::new));
-//        entitiesList.addAll(createEntityBatch(random, 150, Rabbit::new));
-//        entitiesList.addAll(createEntityBatch(random, 200, Plant::new));
+        entityList.addAll(createEntityBatch(random, 30, Snake::new));
+        entityList.addAll(createEntityBatch(random, 30, Fox::new));
+        entityList.addAll(createEntityBatch(random, 5, Bear::new));
+        entityList.addAll(createEntityBatch(random, 20, Eagle::new));
+        entityList.addAll(createEntityBatch(random, 20, Horse::new));
+        entityList.addAll(createEntityBatch(random, 20, Reindeer::new));
+        entityList.addAll(createEntityBatch(random, 150, Rabbit::new));
+        entityList.addAll(createEntityBatch(random, 200, Plant::new));
         return entityList;
     }
 

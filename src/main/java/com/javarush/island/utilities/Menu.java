@@ -1,5 +1,6 @@
 package com.javarush.island.utilities;
 
+import com.javarush.island.entities.animals.predators.Wolf;
 import com.javarush.island.map.GameMap;
 
 import java.util.Scanner;
@@ -25,31 +26,42 @@ public class Menu {
 
         //  Для проверки реализации. После удалить! {
 
-        for (var map : gameMap.getLocations()
+        for (var locations : gameMap.getLocations()
         ) {
-            for (var loc : map
+            for (var location : locations
             ) {
-                sizeBefore += loc.getEntityList().size();
+                sizeBefore += location.getEntityList().size();
+                System.out.println(location.getEntityList().stream().filter(obj -> obj.getClass().equals(Wolf.class))
+                        .count());
             }
         }
 
-        for (var map : gameMap.getLocations()
-        ) {
-            for (var loc : map
+        for (int i = 0; i < 2; i++) {
+            for (var locations : gameMap.getLocations()
             ) {
-                loc.move();
+                for (var location : locations
+                ) {
+                    location.move();
+                }
+            }
+            System.out.println("Выполнено перемещение животных!");
+            try {
+                Thread.sleep(3000);
+            } catch (InterruptedException e) {
+                throw new RuntimeException(e);
             }
         }
 
-        for (var map : gameMap.getLocations()
+        for (var locations : gameMap.getLocations()
         ) {
-            for (var loc : map
+            for (var location : locations
             ) {
-                sizeAfter += loc.getEntityList().size();
+                sizeAfter += location.getEntityList().size();
+                System.out.println(location.getEntityList().stream().filter(obj -> obj.getClass().equals(Wolf.class))
+                        .count());
             }
         }
 
-        //  }
         System.out.println("Размер до: " + sizeBefore);
         System.out.println("Размер после: " + sizeAfter);
     }
