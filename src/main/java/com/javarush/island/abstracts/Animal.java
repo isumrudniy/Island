@@ -1,6 +1,6 @@
 package com.javarush.island.abstracts;
 
-import com.javarush.island.entities.Entities;
+import com.javarush.island.entities.Entity;
 
-public abstract class Animal extends Entities {
+public abstract class Animal extends Entity {
 }

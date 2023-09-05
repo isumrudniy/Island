@@ -1,6 +1,6 @@
 package com.javarush.island.entities.plants;
 
-import com.javarush.island.entities.Entities;
+import com.javarush.island.entities.Entity;
 
-public class Plant extends Entities {
+public class Plant extends Entity {
 }
