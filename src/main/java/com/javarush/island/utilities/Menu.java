@@ -41,7 +41,7 @@ public class Menu {
             ) {
                 for (var location : locations
                 ) {
-                    location.move();
+                    location.moveEntity();
                 }
             }
             System.out.println("Выполнено перемещение животных!");
