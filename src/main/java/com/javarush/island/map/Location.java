@@ -17,7 +17,7 @@ import java.util.*;
 public class Location implements Movable {
     private int x;
     private int y;
-    private List<Entity> entityList = new ArrayList<>();
+    private volatile List<Entity> entityList = new ArrayList<>();
 
     @Override
     public void move() {
