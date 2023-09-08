@@ -9,10 +9,11 @@ import lombok.Setter;
 
 import java.util.HashMap;
 import java.util.Random;
+import java.util.function.Supplier;
 
 @Getter
 @Setter
-public abstract class Entity implements Movable {
+public abstract class Entity implements Movable, Supplier {
 
     private String name;
     private String icon;
@@ -24,14 +25,22 @@ public abstract class Entity implements Movable {
     {
         YamlConfigReader configReader = new YamlConfigReader(this.getClass());
         HashMap<String, Object> configMap = configReader.getConfigMap();
+        try {
+            name = (String) configMap.get("name");
+            icon = (String) configMap.get("icon");
+            maxWeight = (Double) configMap.get("maxWeight");
+            maxAmount = (Integer) configMap.get("maxAmount");
+            maxSpeed = (Integer) configMap.get("maxSpeed");
+            maxFood = (Double) configMap.get("maxFood");
+        } catch (Exception e) {
+            throw new RuntimeException(e);
+        }
 
-        name = (String) configMap.get("name");
-        icon = (String) configMap.get("icon");
-        maxWeight = (Double) configMap.get("maxWeight");
-        maxAmount = (Integer) configMap.get("maxAmount");
-        maxSpeed = (Integer) configMap.get("maxSpeed");
-        maxFood = (Double) configMap.get("maxFood");
+    }
 
+    @Override
+    public Entity get() {
+        return this;
     }
 
     @Override
