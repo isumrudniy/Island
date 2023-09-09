@@ -1,19 +1,20 @@
 package com.javarush.island.entities;
 
+import com.javarush.island.behavior.Eatable;
 import com.javarush.island.behavior.Movable;
+import com.javarush.island.behavior.Reproducible;
 import com.javarush.island.map.GameMap;
 import com.javarush.island.map.Location;
 import com.javarush.island.utilities.YamlConfigReader;
 import lombok.Getter;
 import lombok.Setter;
 
-import java.util.HashMap;
-import java.util.Random;
+import java.util.*;
 import java.util.function.Supplier;
 
 @Getter
 @Setter
-public abstract class Entity implements Movable, Supplier {
+public abstract class Entity implements Movable, Eatable, Reproducible, Supplier {
 
     private String name;
     private String icon;
@@ -22,6 +23,9 @@ public abstract class Entity implements Movable, Supplier {
     private int maxSpeed;
     private double maxFood;
 
+    private Map<Entity,Integer> eatableTable;
+
+    // non-static
     {
         YamlConfigReader configReader = new YamlConfigReader(this.getClass());
         HashMap<String, Object> configMap = configReader.getConfigMap();
@@ -35,7 +39,6 @@ public abstract class Entity implements Movable, Supplier {
         } catch (Exception e) {
             throw new RuntimeException(e);
         }
-
     }
 
     @Override
@@ -92,7 +95,26 @@ public abstract class Entity implements Movable, Supplier {
         long count = location.getEntityList().stream().filter(obj ->
                 obj.getClass().equals(this.getClass())
         ).count();
-        return true;
+        return (count <= this.maxAmount);
     }
 
+    @Override
+    public void eat(Location location) {
+
+    }
+
+    @Override
+    public boolean isCanEat() {
+        return false;
+    }
+
+    @Override
+    public void reproduce(List<Entity> entityList) {
+
+    }
+
+    @Override
+    public boolean isCanReproduce(List<Entity> entityList) {
+        return false;
+    }
 }

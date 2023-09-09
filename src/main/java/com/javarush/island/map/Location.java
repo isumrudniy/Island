@@ -38,4 +38,12 @@ public class Location {
         }
     }
 
+    public void eatEntity() {
+
+    }
+
+    public void reproduceEntity() {
+
+    }
+
 }

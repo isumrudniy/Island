@@ -1,7 +1,11 @@
 package com.javarush.island.behavior;
 
-public interface Reproducible {
-    void reproduce();
+import com.javarush.island.entities.Entity;
 
-    boolean isCanReproduce();
+import java.util.List;
+
+public interface Reproducible {
+    void reproduce(List<Entity> entityList);
+
+    boolean isCanReproduce(List<Entity> entityList);
 }

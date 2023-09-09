@@ -5,9 +5,7 @@ import com.javarush.island.entities.animals.herbivores.*;
 import com.javarush.island.entities.animals.predators.*;
 import com.javarush.island.entities.plants.Plant;
 
-import java.util.Arrays;
-import java.util.HashSet;
-import java.util.Set;
+import java.util.*;
 
 public class Settings {
 
@@ -20,10 +18,10 @@ public class Settings {
     public static int ROWS;
     public static int COLS;
 
-    public static final Set<? extends Entity> entitySet = new HashSet<>(Arrays.asList(
-            new Boar(), new Buffalo(), new Caterpillar(), new Duck(), new Goat(), new Horse(),
-            new Mouse(), new Rabbit(), new Reindeer(), new Sheep(), new Bear(), new Eagle(),
-            new Fox(), new Snake(), new Wolf(), new Plant()
+    public static final List<? extends Entity> entitySet = new ArrayList<>(Arrays.asList(
+            new Wolf(), new Snake(), new Fox(), new Bear(), new Eagle(), new Horse(), new Reindeer(),
+            new Rabbit(), new Mouse(), new Goat(), new Sheep(), new Boar(), new Buffalo(), new Duck(), new Caterpillar(),
+            new Plant()
     ));
 
 }

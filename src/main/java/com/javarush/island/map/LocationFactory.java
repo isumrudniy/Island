@@ -1,13 +1,9 @@
 package com.javarush.island.map;
 
 import com.javarush.island.entities.Entity;
-import com.javarush.island.entities.animals.predators.*;
-import com.javarush.island.entities.animals.herbivores.*;
-import com.javarush.island.entities.plants.*;
 import com.javarush.island.utilities.Settings;
 
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
 import java.util.Random;
 import java.util.function.Supplier;
