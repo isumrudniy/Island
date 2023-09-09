@@ -3,18 +3,21 @@ package com.javarush.island.entities;
 import com.javarush.island.behavior.Eatable;
 import com.javarush.island.behavior.Movable;
 import com.javarush.island.behavior.Reproducible;
+import com.javarush.island.entities.animals.herbivores.Boar;
 import com.javarush.island.map.GameMap;
 import com.javarush.island.map.Location;
 import com.javarush.island.utilities.YamlConfigReader;
 import lombok.Getter;
 import lombok.Setter;
 
+import java.lang.reflect.Constructor;
+import java.lang.reflect.InvocationTargetException;
 import java.util.*;
 import java.util.function.Supplier;
 
 @Getter
 @Setter
-public abstract class Entity implements Movable, Eatable, Reproducible, Supplier {
+public abstract class Entity implements Movable, Eatable, Supplier {
 
     private String name;
     private String icon;
@@ -23,7 +26,7 @@ public abstract class Entity implements Movable, Eatable, Reproducible, Supplier
     private int maxSpeed;
     private double maxFood;
 
-    private Map<Entity,Integer> eatableTable;
+    private Map<Entity, Integer> eatableTable;
 
     // non-static
     {
@@ -93,7 +96,7 @@ public abstract class Entity implements Movable, Eatable, Reproducible, Supplier
 
     private boolean isCanMove(Location location) {
         long count = location.getEntityList().stream().filter(obj ->
-                obj.getClass().equals(this.getClass())
+                obj.equals(this)
         ).count();
         return (count <= this.maxAmount);
     }
@@ -108,13 +111,28 @@ public abstract class Entity implements Movable, Eatable, Reproducible, Supplier
         return false;
     }
 
-    @Override
-    public void reproduce(List<Entity> entityList) {
-
+    public Entity createNewEntity() {
+        try {
+            Class<? extends Entity> clazz = this.getClass();
+            Constructor<? extends Entity> constructor = clazz.getDeclaredConstructor();
+            return constructor.newInstance();
+        } catch (InstantiationException | IllegalAccessException | NoSuchMethodException |
+                 InvocationTargetException e) {
+            throw new RuntimeException(e);
+        }
     }
 
     @Override
-    public boolean isCanReproduce(List<Entity> entityList) {
-        return false;
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        Entity entity = (Entity) o;
+        return Objects.equals(name, entity.name);
     }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(name);
+    }
+
 }

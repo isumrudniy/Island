@@ -21,35 +21,32 @@ public class Menu {
         // Инициализация острова
         GameMap gameMap = GameMap.getInstance();
 
-        int sizeBefore = 0;
-        int sizeAfter = 0;
+        long sizeBefore = 0;
+        long sizeAfter = 0;
 
-        //  Для проверки реализации. После удалить! {
+//          Для проверки реализации. После удалить!
 
         for (var locations : gameMap.getLocations()
         ) {
             for (var location : locations
             ) {
                 sizeBefore += location.getEntityList().size();
-                System.out.println(location.getEntityList().stream().filter(obj -> obj.getClass().equals(Wolf.class))
-                        .count());
             }
         }
 
-        for (int i = 0; i < 2; i++) {
-            for (var locations : gameMap.getLocations()
+        for (var locations : gameMap.getLocations()
+        ) {
+            for (var location : locations
             ) {
-                for (var location : locations
-                ) {
-                    location.moveEntity();
-                }
+                location.moveEntity();
+                location.reproduceEntity();
             }
-            System.out.println("Выполнено перемещение животных!");
-            try {
-                Thread.sleep(3000);
-            } catch (InterruptedException e) {
-                throw new RuntimeException(e);
-            }
+        }
+        System.out.println("Выполнено перемещение животных!");
+        try {
+            Thread.sleep(1);
+        } catch (InterruptedException e) {
+            throw new RuntimeException(e);
         }
 
         for (var locations : gameMap.getLocations()
@@ -57,8 +54,6 @@ public class Menu {
             for (var location : locations
             ) {
                 sizeAfter += location.getEntityList().size();
-                System.out.println(location.getEntityList().stream().filter(obj -> obj.getClass().equals(Wolf.class))
-                        .count());
             }
         }
 
