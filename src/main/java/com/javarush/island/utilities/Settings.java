@@ -51,5 +51,4 @@ public class Settings {
         });
         System.out.println();
     }
-
 }

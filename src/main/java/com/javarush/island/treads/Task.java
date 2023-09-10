@@ -6,6 +6,7 @@ import com.javarush.island.utilities.Settings;
 public class Task implements Runnable {
     @Override
     public void run() {
+
         GameMap gameMap = GameMap.getInstance();
 
         for (var locations : gameMap.getLocations()) {

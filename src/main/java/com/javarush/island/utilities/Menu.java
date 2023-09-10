@@ -10,12 +10,40 @@ public class Menu {
     public static void openMenu() {
         try (Scanner sc = new Scanner(System.in)) {
             System.out.println(Settings.SALUTATION + "\n" + Settings.CREATE_MAP);
-            System.out.print(Settings.INPUT_ROWS);
-            Settings.ROWS = sc.nextInt();
-            System.out.print(Settings.INPUT_COLS);
-            Settings.COLS = sc.nextInt();
-        } catch (Exception e) {
-            System.out.println(Settings.NOT_KNOW_ERROR);
+            System.out.println(Settings.INPUT_ROWS);
+
+            while (true) {
+                if (sc.hasNextInt()) {
+                    int size = sc.nextInt();
+                    if (size > 0) {
+                        Settings.ROWS = size;
+                        break;
+                    } else {
+                        System.out.println("Введите число больше 0!");
+                    }
+                } else {
+                    System.out.println("Введите число!");
+                    sc.next(); // Очистка некорректного ввода
+                }
+            }
+
+            System.out.println(Settings.INPUT_COLS);
+
+            while (true) {
+                if (sc.hasNextInt()) {
+                    int size = sc.nextInt();
+                    if (size > 0) {
+                        Settings.COLS = size;
+                        break;
+                    } else {
+                        System.out.println("Введите число больше 0!");
+                    }
+                } else {
+                    System.out.println("Введите число!");
+                    sc.next(); // Очистка некорректного ввода
+                }
+            }
+
         }
 
         // Инициализация острова
@@ -32,7 +60,7 @@ public class Menu {
         try {
             TimeUnit.SECONDS.sleep(Settings.TIMEOUT);
         } catch (InterruptedException e) {
-            e.printStackTrace();
+            throw new RuntimeException(e.getMessage());
         }
 
         // Останавливаем выполнение задачи и закрываем executorService
