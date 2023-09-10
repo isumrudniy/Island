@@ -6,7 +6,7 @@ import java.io.InputStream;
 import java.util.HashMap;
 
 public class YamlConfigReader {
-    private HashMap<String, Object> configMap = new HashMap<>();
+    private final HashMap<String, Object> configMap;
 
     public YamlConfigReader(Class<?> clazz) {
         Config Config = clazz.getAnnotation(Config.class);
@@ -22,10 +22,6 @@ public class YamlConfigReader {
         } catch (Exception e) {
             throw new RuntimeException();
         }
-    }
-
-    public Object getConfigValue(String key) {
-        return configMap.get(key);
     }
 
     public HashMap<String, Object> getConfigMap() {

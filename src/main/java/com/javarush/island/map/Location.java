@@ -25,13 +25,11 @@ public class Location implements Reproducible, Eatable, Movable {
     public void moveEntity() {
 
         GameMap gameMap = GameMap.getInstance();
-
         Iterator<Entity> entityIterator = entityList.iterator();
 
         while (entityIterator.hasNext()) {
 
             Entity nextEntity = entityIterator.next();
-
             Location newLocation = nextEntity.move(this);
 
             if (newLocation != null) {
@@ -48,28 +46,29 @@ public class Location implements Reproducible, Eatable, Movable {
 
     @Override
     public void reproduceEntity() {
-        List<Entity> addList = new ArrayList<>();
+        List<Entity> addList = new ArrayList<>(entityList.size() / 4); // Предварительное выделение с оценочным размером
 
-        try {
-            entityList.sort((obj1, obj2) -> obj1.hashCode() - obj2.hashCode());
-        } catch (IllegalArgumentException e) {
-        }
+        Random random = new Random();
+
+        // Сортировка entityList
+        entityList.sort(Comparator.comparingInt(Object::hashCode));
 
         for (int i = 1; i < entityList.size(); i += 2) {
-            if ((entityList.get(i - 1).equals(entityList.get(i))) && (new Random().nextInt(100) > 80)) {
-                addList.add(entityList.get(i).createNewEntity());
+            Entity entity1 = entityList.get(i - 1);
+            Entity entity2 = entityList.get(i);
+
+            if (entity1.equals(entity2) && random.nextInt(100) > 80) {
+                Entity newEntity = entity2.createNewEntity();
+                long count = entityList.stream()
+                        .filter(entity -> entity.equals(newEntity))
+                        .count();
+
+                if (count < newEntity.getMaxAmount()) {
+                    addList.add(newEntity);
+                }
             }
         }
-
-        addList.forEach(addEntity ->
-        {
-            long count = entityList.stream()
-                    .filter(entity -> entity.equals(addEntity))
-                    .count();
-            if (count < addEntity.getMaxAmount()) {
-                entityList.add(addEntity);
-            }
-        });
+        entityList.addAll(addList); // Добавление всех новых сущностей в entityList
     }
 
 }

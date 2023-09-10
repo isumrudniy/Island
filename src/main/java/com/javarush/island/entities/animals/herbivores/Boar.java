@@ -4,7 +4,6 @@ import com.javarush.island.entities.Entity;
 import com.javarush.island.entities.plants.Plant;
 import com.javarush.island.utilities.Config;
 import com.javarush.island.abstracts.Herbivore;
-import com.javarush.island.utilities.YamlConfigReader;
 
 import java.util.HashMap;
 import java.util.Map;

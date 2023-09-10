@@ -5,7 +5,6 @@ import com.javarush.island.entities.Entity;
 import com.javarush.island.entities.animals.herbivores.Duck;
 import com.javarush.island.entities.animals.herbivores.Mouse;
 import com.javarush.island.entities.animals.herbivores.Rabbit;
-import com.javarush.island.entities.plants.Plant;
 import com.javarush.island.utilities.Config;
 
 import java.util.HashMap;

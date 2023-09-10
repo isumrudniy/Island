@@ -3,7 +3,6 @@ package com.javarush.island.entities.animals.predators;
 import com.javarush.island.abstracts.Predator;
 import com.javarush.island.entities.Entity;
 import com.javarush.island.entities.animals.herbivores.*;
-import com.javarush.island.entities.plants.Plant;
 import com.javarush.island.utilities.Config;
 
 import java.util.HashMap;

@@ -1,9 +1,5 @@
 package com.javarush.island.entities;
 
-import com.javarush.island.behavior.Eatable;
-import com.javarush.island.behavior.Movable;
-import com.javarush.island.behavior.Reproducible;
-import com.javarush.island.entities.animals.herbivores.Boar;
 import com.javarush.island.map.GameMap;
 import com.javarush.island.map.Location;
 import com.javarush.island.utilities.YamlConfigReader;

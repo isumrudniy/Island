@@ -1,13 +1,13 @@
 package com.javarush.island.utilities;
 
-import com.javarush.island.entities.animals.predators.Wolf;
 import com.javarush.island.map.GameMap;
+import com.javarush.island.treads.Task;
 
 import java.util.Scanner;
+import java.util.concurrent.*;
 
 public class Menu {
     public static void openMenu() {
-
         try (Scanner sc = new Scanner(System.in)) {
             System.out.println(Settings.SALUTATION + "\n" + Settings.CREATE_MAP);
             System.out.print(Settings.INPUT_ROWS);
@@ -21,43 +21,22 @@ public class Menu {
         // Инициализация острова
         GameMap gameMap = GameMap.getInstance();
 
-        long sizeBefore = 0;
-        long sizeAfter = 0;
+        ScheduledExecutorService executorService = Executors.newScheduledThreadPool(Runtime.getRuntime().availableProcessors());
 
-//          Для проверки реализации. После удалить!
+        long sizeBefore = Settings.calculateTotalEntityCount(gameMap);
+        System.out.println("Количество существ: " + sizeBefore);
 
-        for (var locations : gameMap.getLocations()
-        ) {
-            for (var location : locations
-            ) {
-                sizeBefore += location.getEntityList().size();
-            }
-        }
+        ScheduledFuture<?> scheduledFuture = executorService.scheduleAtFixedRate(new Task(), 0, Settings.PERIOD, TimeUnit.SECONDS);
 
-        for (var locations : gameMap.getLocations()
-        ) {
-            for (var location : locations
-            ) {
-                location.moveEntity();
-                location.reproduceEntity();
-            }
-        }
-        System.out.println("Выполнено перемещение животных!");
         try {
-            Thread.sleep(1);
+            TimeUnit.SECONDS.sleep(Settings.TIMEOUT);
         } catch (InterruptedException e) {
-            throw new RuntimeException(e);
+            e.printStackTrace();
         }
 
-        for (var locations : gameMap.getLocations()
-        ) {
-            for (var location : locations
-            ) {
-                sizeAfter += location.getEntityList().size();
-            }
-        }
+        // Останавливаем выполнение задачи и закрываем executorService
+        scheduledFuture.cancel(true);
+        executorService.shutdown();
 
-        System.out.println("Размер до: " + sizeBefore);
-        System.out.println("Размер после: " + sizeAfter);
     }
 }

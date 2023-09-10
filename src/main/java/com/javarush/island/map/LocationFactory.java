@@ -13,18 +13,16 @@ public class LocationFactory {
         Location location = new Location();
         location.setX(x);
         location.setY(y);
-        location.setEntityList(createEntities(x, y));
+        location.setEntityList(createEntities());
         return location;
     }
 
     // Оптимизировать, значения брать из yaml (максимальное значение животных в одной локации)
-    private List<Entity> createEntities(int x, int y) {
+    private List<Entity> createEntities() {
         List<Entity> entityList = new ArrayList<>();
         Random random = new Random();
 
-        Settings.entitySet.forEach(obj -> {
-            entityList.addAll(createEntityBatch(random, obj.getMaxAmount(), obj));
-        });
+        Settings.entitySet.forEach(obj -> entityList.addAll(createEntityBatch(random, obj.getMaxAmount(), obj)));
 
         return entityList;
     }
