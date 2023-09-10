@@ -24,7 +24,8 @@ public class Menu {
         ScheduledExecutorService executorService = Executors.newScheduledThreadPool(Runtime.getRuntime().availableProcessors());
 
         long sizeBefore = Settings.calculateTotalEntityCount(gameMap);
-        System.out.println("Количество существ: " + sizeBefore);
+        System.out.println("Старт. Количество существ: " + sizeBefore);
+        Settings.infoTotalEntity(gameMap);
 
         ScheduledFuture<?> scheduledFuture = executorService.scheduleAtFixedRate(new Task(), 0, Settings.PERIOD, TimeUnit.SECONDS);
 

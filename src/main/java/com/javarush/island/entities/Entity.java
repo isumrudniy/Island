@@ -24,7 +24,7 @@ public abstract class Entity implements Supplier {
 
     private Map<Entity, Integer> eatableTable;
 
-    // non-static
+    // non-static. Заполняем информацию по объекту из конфигураций yaml-файлов
     {
         YamlConfigReader configReader = new YamlConfigReader(this.getClass());
         HashMap<String, Object> configMap = configReader.getConfigMap();

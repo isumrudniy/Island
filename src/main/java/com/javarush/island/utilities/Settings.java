@@ -5,8 +5,10 @@ import com.javarush.island.entities.animals.herbivores.*;
 import com.javarush.island.entities.animals.predators.*;
 import com.javarush.island.entities.plants.Plant;
 import com.javarush.island.map.GameMap;
+import com.javarush.island.map.Location;
 
 import java.util.*;
+import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
 public class Settings {
@@ -34,6 +36,21 @@ public class Settings {
                 .flatMap(Stream::of)
                 .mapToLong(location -> location.getEntityList().size())
                 .sum();
+    }
+
+    public static void infoTotalEntity(GameMap gameMap) {
+        Map<Entity, Long> entityCountMap = Stream.of(gameMap.getLocations())
+                .flatMap(Stream::of)
+                .flatMap(location -> location.getEntityList().stream())
+                .collect(Collectors.groupingBy(
+                        entity -> entity,
+                        Collectors.counting()
+                ));
+
+        entityCountMap.forEach((entity, count) -> {
+            System.out.print(entity.getIcon() + " " + count + " ");
+        });
+        System.out.println();
     }
 
 }

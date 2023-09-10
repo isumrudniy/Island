@@ -12,6 +12,7 @@ public class Task implements Runnable {
             for (var location : locations) {
                 synchronized (location) {
                     location.moveEntity();
+                    location.eatEntity();
                     location.reproduceEntity();
                 }
             }
@@ -19,5 +20,6 @@ public class Task implements Runnable {
 
         long sizeAfter = Settings.calculateTotalEntityCount(gameMap);
         System.out.println("Количество существ: " + sizeAfter);
+        Settings.infoTotalEntity(gameMap);
     }
 }

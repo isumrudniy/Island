@@ -42,6 +42,34 @@ public class Location implements Reproducible, Eatable, Movable {
     @Override
     public void eatEntity() {
 
+        Random random = new Random();
+
+        for (var entity : entityList
+        ) {
+            if (entity.getMaxFood() > 0) {
+                Map<Entity, Integer> victumMap = entity.getEatableTable();
+                for (var victum : victumMap.entrySet()
+                ) {
+                    Optional<Entity> victumFilter = entityList.stream()
+                            .filter(obj -> obj.equals(victum.getKey()) && obj.getMaxFood() > 0)
+                            .findFirst();
+                    //
+                    if (victumFilter.isPresent() && random.nextInt(100) > (100 - victum.getValue()) ) {
+                        victumFilter.get().setMaxFood(0);
+                    } else {
+                        entity.setMaxFood(0);
+                    }
+                }
+            }
+        }
+
+        Iterator<Entity> entityIterator = entityList.iterator();
+
+        while (entityIterator.hasNext()) {
+            if (entityIterator.next().getMaxFood() == 0)
+                entityIterator.remove();
+        }
+
     }
 
     @Override
@@ -51,7 +79,7 @@ public class Location implements Reproducible, Eatable, Movable {
         Random random = new Random();
 
         // Сортировка entityList
-        entityList.sort(Comparator.comparingInt(Object::hashCode));
+        entityList.sort(Comparator.comparingInt(Entity::hashCode));
 
         for (int i = 1; i < entityList.size(); i += 2) {
             Entity entity1 = entityList.get(i - 1);
@@ -63,7 +91,7 @@ public class Location implements Reproducible, Eatable, Movable {
                         .filter(entity -> entity.equals(newEntity))
                         .count();
 
-                if (count < newEntity.getMaxAmount()) {
+                if (count < newEntity.getMaxAmount()) { // Порверяем, что нет превышения по кол-ву в ячейке по каждому виду
                     addList.add(newEntity);
                 }
             }
