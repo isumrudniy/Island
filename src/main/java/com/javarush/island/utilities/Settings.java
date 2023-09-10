@@ -5,7 +5,6 @@ import com.javarush.island.entities.animals.herbivores.*;
 import com.javarush.island.entities.animals.predators.*;
 import com.javarush.island.entities.plants.Plant;
 import com.javarush.island.map.GameMap;
-import com.javarush.island.map.Location;
 
 import java.util.*;
 import java.util.stream.Collectors;
