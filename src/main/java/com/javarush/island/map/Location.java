@@ -1,5 +1,7 @@
 package com.javarush.island.map;
 
+import com.javarush.island.behavior.Eatable;
+import com.javarush.island.behavior.Movable;
 import com.javarush.island.behavior.Reproducible;
 import com.javarush.island.entities.Entity;
 import lombok.AllArgsConstructor;
@@ -14,11 +16,12 @@ import java.util.*;
 @AllArgsConstructor
 @NoArgsConstructor
 
-public class Location implements Reproducible {
+public class Location implements Reproducible, Eatable, Movable {
     private int x;
     private int y;
     private volatile List<Entity> entityList = new ArrayList<>();
 
+    @Override
     public void moveEntity() {
 
         GameMap gameMap = GameMap.getInstance();
@@ -38,6 +41,7 @@ public class Location implements Reproducible {
         }
     }
 
+    @Override
     public void eatEntity() {
 
     }

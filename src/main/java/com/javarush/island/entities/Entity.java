@@ -17,7 +17,7 @@ import java.util.function.Supplier;
 
 @Getter
 @Setter
-public abstract class Entity implements Movable, Eatable, Supplier {
+public abstract class Entity implements Supplier {
 
     private String name;
     private String icon;
@@ -49,7 +49,6 @@ public abstract class Entity implements Movable, Eatable, Supplier {
         return this;
     }
 
-    @Override
     public Location move(Location location) {
 
         GameMap gameMap = GameMap.getInstance();
@@ -99,16 +98,6 @@ public abstract class Entity implements Movable, Eatable, Supplier {
                 obj.equals(this)
         ).count();
         return (count <= this.maxAmount);
-    }
-
-    @Override
-    public void eat(Location location) {
-
-    }
-
-    @Override
-    public boolean isCanEat() {
-        return false;
     }
 
     public Entity createNewEntity() {
